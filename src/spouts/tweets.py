@@ -4,16 +4,17 @@ import itertools, time
 import tweepy, copy 
 import Queue, threading
 
+#from Twittercredentials import *
 from streamparse.spout import Spout
 
 ################################################################################
 # Twitter credentials
 ################################################################################
 twitter_credentials = {
-    "consumer_key"        :  "<enter your consumer key>",
-    "consumer_secret"     :  "<enter your consumer secret key>",
-    "access_token"        :  "<enter your access token>",
-    "access_token_secret" :  "<enter your access token secret key>",
+    "consumer_key"        :  "",
+    "consumer_secret"     :  "",
+    "access_token"        :  "",
+    "access_token_secret" :  "",
 }
 
 def auth_get(auth_key):
@@ -55,6 +56,7 @@ class Tweets(Spout):
             auth.set_access_token(access_token, access_token_secret)
 
         self._tweepy_api = tweepy.API(auth)
+        #self._tweepy_api = api
 
         # Create the listener for twitter stream
         listener = TweetStreamListener(self)
