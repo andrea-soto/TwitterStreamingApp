@@ -1,0 +1,9 @@
+.DS_Store
+_build
+_resources
+logs
+
+Twittercredentials*
+hello-stream-twitter.py
+virtualenvs/
+
