@@ -4,7 +4,8 @@ from collections import Counter
 from redis import StrictRedis
 from streamparse.bolt import Bolt
 
-
+import psycopg2
+import time
 
 class WordCounter(Bolt):
 
@@ -20,11 +21,23 @@ class WordCounter(Bolt):
         # Database name: Tcount 
         # Table name: Tweetwordcount 
         # you need to create both the database and the table in advance.
-        
+        conn = psycopg2.connect(database="tcount", user="postgres")
+        cur = conn.cursor()
 
         # Increment the local count
         self.counts[word] += 1
-        self.emit([word, self.counts[word]])
+        if self.counts[word] == 1:
+            # New word > INSERT INTO
+            sql = "INSERT INTO Tweetwordcount (word,count) VALUES ('%s', %d);" %(unicode(word), self.counts[word])
+        else:
+            # Update word count > UPDATE
+            sql = "UPDATE Tweetwordcount SET count=%d WHERE word='%s';" %(self.counts[word], unicode(word))
+
+        cur.execute(sql)
+        conn.commit()
+        
+        #self.emit([word, self.counts[word]])
 
         # Log the count - just to see the topology running
         self.log('%s: %d' % (word, self.counts[word]))
+

@@ -1,20 +1,16 @@
+
 from __future__ import absolute_import, print_function, unicode_literals
 
 import itertools, time
 import tweepy, copy 
 import Queue, threading
 
-#from Twittercredentials import *
 from streamparse.spout import Spout
 
 ################################################################################
 # Twitter credentials
 ################################################################################
 twitter_credentials = {
-    "consumer_key"        :  "",
-    "consumer_secret"     :  "",
-    "access_token"        :  "",
-    "access_token_secret" :  "",
 }
 
 def auth_get(auth_key):
@@ -56,7 +52,6 @@ class Tweets(Spout):
             auth.set_access_token(access_token, access_token_secret)
 
         self._tweepy_api = tweepy.API(auth)
-        #self._tweepy_api = api
 
         # Create the listener for twitter stream
         listener = TweetStreamListener(self)
@@ -79,7 +74,7 @@ class Tweets(Spout):
                 self.emit([tweet])
  
         except Queue.Empty:
-            self.log("Empty queue exception ")
+            self.log("Empty queue exception")
             time.sleep(0.1) 
 
     def ack(self, tup_id):

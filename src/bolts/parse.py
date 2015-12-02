@@ -35,6 +35,8 @@ class ParseTweet(Bolt):
 
             # Strip leading and lagging punctuations
             aword = word.strip("\"?><,'.:;)")
+            aword = aword.lower()
+            aword = re.sub("'","",aword)
 
             # now check if the word contains only ascii
             if len(aword) > 0 and ascii_string(word):
