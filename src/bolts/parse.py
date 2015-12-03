@@ -7,7 +7,7 @@ from streamparse.bolt import Bolt
 # Function to check if the string contains only ascii chars
 ################################################################################
 def ascii_string(s):
-  return all(ord(c) < 128 for c in s)
+    return all(ord(c) < 128 for c in s)
 
 class ParseTweet(Bolt):
 
@@ -35,8 +35,15 @@ class ParseTweet(Bolt):
 
             # Strip leading and lagging punctuations
             aword = word.strip("\"?><,'.:;)")
+            # Clean other charactes from string 
             aword = aword.lower()
+            # Basic word cleaning
             aword = re.sub("'","",aword)
+            aword = re.sub("/","", aword)
+            aword = re.sub("\)","", aword)
+            aword = re.sub("\(","", aword)
+            aword = re.sub("[0-9!@#$%^&*-_+=~{}|:;<>?,.]","", aword)
+            aword = aword.replace("\\","")
 
             # now check if the word contains only ascii
             if len(aword) > 0 and ascii_string(word):

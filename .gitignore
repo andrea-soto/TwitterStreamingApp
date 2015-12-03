@@ -7,3 +7,5 @@ Twittercredentials*
 hello-stream-twitter.py
 virtualenvs/
 
+.ipynb_checkpoints/
+

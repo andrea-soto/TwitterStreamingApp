@@ -23,7 +23,11 @@ class WordCounter(Bolt):
         # you need to create both the database and the table in advance.
         conn = psycopg2.connect(database="tcount", user="postgres")
         cur = conn.cursor()
-
+        
+        sql = "UPDATE Tweetwordcount SET count=%d WHERE word='%s';" %(self.counts[word], unicode(word))
+        cur.execute(sql)
+        conn.commit()
+        
         # Increment the local count
         self.counts[word] += 1
         if self.counts[word] == 1:
@@ -35,9 +39,7 @@ class WordCounter(Bolt):
 
         cur.execute(sql)
         conn.commit()
-        
         #self.emit([word, self.counts[word]])
 
         # Log the count - just to see the topology running
         self.log('%s: %d' % (word, self.counts[word]))
-
