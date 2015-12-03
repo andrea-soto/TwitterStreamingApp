@@ -1,6 +1,5 @@
-
 from __future__ import absolute_import, print_function, unicode_literals
-
+#TEST THIS
 import itertools, time
 import tweepy, copy 
 import Queue, threading
@@ -11,6 +10,10 @@ from streamparse.spout import Spout
 # Twitter credentials
 ################################################################################
 twitter_credentials = {
+    "consumer_key"        :  "lxm4Nf8lJElAi5VCvbCTAeSj1",
+    "consumer_secret"     :  "KKWw60hoRLU3TOkiHtT2xLOTu3G3bcQ6eee9kbZPahfxVDiB3F",
+    "access_token"        :  "195097748-N9FbGLe2H32RPzMy9upSbflkk7GisamQ0XFt76Rg",
+    "access_token_secret" :  "4aiLQlyUkeFnJ2Dhw5FS9TZn2oHLdqsivH7YKXRwnBkGj"
 }
 
 def auth_get(auth_key):
