@@ -26,6 +26,7 @@ The main directories of the project are:
 The description of the main files of the project and their location are shown in the tables below.
 
 **Storm Application Files**
+
 |File Name|Location|Description|
 |:--|:--|:--|
 |tweetwordcount.clj  |./EX2Tweetwordcount/topologies/|Application topology|
@@ -34,6 +35,7 @@ The description of the main files of the project and their location are shown in
 |wordcount.py|./EX2Tweetwordcount/src/bolts/|Bolt to count words and update Postgres|
 
 **Servicing Files (Query Postgres Database)**
+
 |File Name|Location|Description|
 |:--|:--|:--|
 |finalresults.py|./analysis/|Return the count of a word. If a word is not provided, it returns all word counts|
