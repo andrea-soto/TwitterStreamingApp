@@ -5,7 +5,6 @@
 
 **Andrea Soto | Exercise 2 | MIDS W205 - Storing and Retrieving Data**
 
-This README.md file was created with the notebook [Project Report.ipynb](Project Report.ipynb)
 ---
 
 ## Project Overview
