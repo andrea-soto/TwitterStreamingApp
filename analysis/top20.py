@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import psycopg2
+import os
 import numpy as np
 
 import matplotlib
@@ -18,7 +19,7 @@ def bar_plot(names, values):
     plt.bar(n, values, color='#89C6DA')
     plt.xticks(n+0.5, names, rotation=0, size=12)
     
-    plt.savefig('analysis/plot.png', format='png')
+    plt.savefig(os.getcwd()+'/plot.png', format='png')
     
 def top20():
         
