@@ -21,76 +21,41 @@ The directory structure of the project is shown below.
 ```
 
     .
-
     |-- Description of Serving Scripts.ipynb
-
     |-- Develop Code.ipynb
-
     |-- EX2Tweetwordcount
-
     |   |-- config.json
-
     |   |-- dev-resources
-
     |   |-- fabfile.py
-
     |   |-- logs
-
     |   |-- project.clj
-
     |   |-- src
-
     |   |   |-- bolts
-
     |   |   |   |-- __init__.py
-
     |   |   |   |-- parse.py
-
     |   |   |   `-- wordcount.py
-
     |   |   `-- spouts
-
     |   |       |-- __init__.py
-
     |   |       `-- tweets.py
-
     |   |-- tasks.py
-
     |   |-- test
-
     |   |-- topologies
-
     |   |   `-- tweetwordcount.clj
-
     |   `-- virtualenvs
-
     |       `-- wordcount.txt
-
     |-- Jupyter Notebook.ipynb
-
     |-- README.md
-
     |-- analysis
-
     |   |-- finalresults.py
-
     |   |-- histogram.py
-
     |   |-- plot.png
-
     |   `-- top20.py
-
     `-- screenshots
-
     
 
     11 directories, 19 files
 
-
-
-
 ```python
-%%html
 <style>
 table {float:left}
 </style>
@@ -112,7 +77,7 @@ The description of the main files of the project and their location are shown in
 
 ### Storm Application Files
 |File Name|Location|Description|
-|:--|:-|:--|
+|:--|:--|:--|
 |tweetwordcount.clj  |./EX2Tweetwordcount/topologies/|Application topology|
 |tweets.py|./EX2Tweetwordcount/src/spouts/|Spout to collect tweets|
 |parse.py|./EX2Tweetwordcount/src/bolts/|Bolt to parse tweet and clean words|
@@ -136,33 +101,8 @@ The following commands were used to run the storm application and collect tweets
 
 Tweets were collected for approximately one day starting December 3 and ending December 4. The number of distinct words encountered and the total count of all words is shown below.
 
-
-```python
-import psycopg2
-import time
-import sys
-
-conn = psycopg2.connect(database="tcount", user="postgres")
-cur = conn.cursor()
-
-summary = []
-sql = "select count(*) from Tweetwordcount ;" 
-cur.execute(sql)
-summary.append(('Number of distinct words:\t', cur.fetchall()[0][0]))
-
-sql = "select sum(count) from Tweetwordcount ;" 
-cur.execute(sql)
-summary.append(('Total count of all words:\t', cur.fetchall()[0][0]))
-
-conn.commit()
-conn.close()
-
-for i,j in summary:
-    print i+"{:,}".format(j)
-```
-
-    Number of distinct words:	61,569
-    Total count of all words:	3,702,525
+Number of distinct words:	61,569
+Total count of all words:	3,702,525
 
 
 ---
