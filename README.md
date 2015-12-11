@@ -1,8 +1,11 @@
 
+![logo](./logo.png)
+
 # Twitter Streaming Application
 
 **Andrea Soto | Exercise 2 | MIDS W205 - Storing and Retrieving Data**
 
+This README.md file was created with the notebook [Project Report.ipynb](Project Report.ipynb)
 ---
 
 ## Project Overview
@@ -11,55 +14,86 @@ In this exercise I developed an application that reads a stream of tweets from t
 
 The architecture is shown in the image below.
 
-> ADD IMAGE HERE
+![Architecture](./architecture.png)
 
 The directory structure of the project is shown below.
 
+.
 
-```python
-!tree -I 'streamparse_tweetwordcount*|_build*|_resources'
-```
+|-- Develop Code.ipynb
 
-    .
-    |-- Description of Serving Scripts.ipynb
-    |-- Develop Code.ipynb
-    |-- EX2Tweetwordcount
-    |   |-- config.json
-    |   |-- dev-resources
-    |   |-- fabfile.py
-    |   |-- logs
-    |   |-- project.clj
-    |   |-- src
-    |   |   |-- bolts
-    |   |   |   |-- __init__.py
-    |   |   |   |-- parse.py
-    |   |   |   `-- wordcount.py
-    |   |   `-- spouts
-    |   |       |-- __init__.py
-    |   |       `-- tweets.py
-    |   |-- tasks.py
-    |   |-- test
-    |   |-- topologies
-    |   |   `-- tweetwordcount.clj
-    |   `-- virtualenvs
-    |       `-- wordcount.txt
-    |-- Jupyter Notebook.ipynb
-    |-- README.md
-    |-- analysis
-    |   |-- finalresults.py
-    |   |-- histogram.py
-    |   |-- plot.png
-    |   `-- top20.py
-    `-- screenshots
-    
+|-- EX2Tweetwordcount
 
-    11 directories, 19 files
+|   |-- config.json
 
-```python
-<style>
-table {float:left}
-</style>
-```
+|   |-- dev-resources
+
+|   |-- fabfile.py
+
+|   |-- logs
+
+|   |-- project.clj
+
+|   |-- src
+
+|   |   |-- bolts
+
+|   |   |   |-- __init__.py
+
+|   |   |   |-- parse.py
+
+|   |   |   `-- wordcount.py
+
+|   |   `-- spouts
+
+|   |       |-- __init__.py
+
+|   |       `-- tweets.py
+
+|   |-- tasks.py
+
+|   |-- test
+
+|   |-- topologies
+
+|   |   `-- tweetwordcount.clj
+
+|   `-- virtualenvs
+
+|       `-- wordcount.txt
+
+|-- Project Report.ipynb
+
+|-- README.md
+
+|-- analysis
+
+|   |-- finalresults.py
+
+|   |-- histogram.py
+
+|   |-- plot.png
+
+|   `-- top20.py
+
+|-- architecture.png
+
+|-- logo.png
+
+`-- screenshots
+
+    |-- screenshot_1-Test Twitter Connection.png
+
+    |-- screenshot_2-Check Adding Records To Postgres.png
+
+    |-- screenshot_3-Running Application.png
+
+    `-- screenshot_4-Storm Topology.png
+
+
+
+11 directories, 24 files
+
 
 
 <style>
@@ -90,6 +124,8 @@ The description of the main files of the project and their location are shown in
 |histogram.py|./analysis/|Return all words with count between a given interval|
 |top20.py|./analysis/|Return the top-20 words by count and create a bar-chart saved as 'plot.png'|
 
+The notebook 'Project Report.ipynb' was the baseline for this report and the notebook 'Develop Code.ipynb' was used to create all the files listed above.
+
 ---
 ## Streaming Overview
 
@@ -100,6 +136,7 @@ The following commands were used to run the storm application and collect tweets
 > `sparse run`
 
 Tweets were collected for approximately one day starting December 3 and ending December 4. The number of distinct words encountered and the total count of all words is shown below.
+
 
 Number of distinct words:	61,569
 Total count of all words:	3,702,525
@@ -142,31 +179,32 @@ The queries done while the application was running were used to make sure the ap
 !python analysis/finalresults.py 10
 ```
 
-    First 10 word-counts (out of 777 words):
+First 10 word-counts (out of 777 words):
 
-    
+   
 
-            Word  Count
+|Word|  Count|
+|:--|:--:|
 
-               a  63
+|   a | 63|
 
-            able  2
+|   able|  2|
 
-           about  7
+|  about|  7|
 
-       according  1
+|  according|  1|
 
-         account  2
+|account | 2|
 
-        actually  3
+|   actually | 3|
 
-         address  3
+|address | 3|
 
-           adele  1
+|  adele | 1|
 
-          adidas  2
+| adidas | 2|
 
-           after  1
+|  after | 1|
 
 
 
@@ -176,31 +214,32 @@ The queries done while the application was running were used to make sure the ap
 !python analysis/finalresults.py 10
 ```
 
-    First 10 word-counts (out of 10059 words):
+First 10 word-counts (out of 10059 words):
 
-    
 
-            Word  Count
 
-               a  4168
+|Word|  Count|
+|:--|:--:|
 
-          aaaaah  2
+|a | 4168|
 
-          aaaand  2
+|aaaaah | 2|
 
-           aampa  2
+|aaaand | 2|
 
-           aampp  2
+|aampa | 2|
 
-           aaood  2
+|   aampp | 2|
 
-           aaron  2
+|   aaood | 2|
 
-          aatuit  2
+|   aaron | 2|
 
-              ab  12
+|  aatuit | 2|
 
-         abandon  2
+|  ab | 12|
+
+| abandon | 2|
 
 
 
@@ -210,31 +249,32 @@ The queries done while the application was running were used to make sure the ap
 !python analysis/finalresults.py 10
 ```
 
-    First 10 word-counts (out of 61569 words):
+First 10 word-counts (out of 61569 words):
 
-    
 
-            Word  Count
 
-               `  1
+|Word|  Count|
+|:--|:--:|
 
-               a  97611
+|   ` | 1|
 
-              aa  31
+|   a | 97611|
 
-             aaa  12
+|  aa | 31|
 
-            aaaa  4
+| aaa | 12|
 
-           aaaaa  2
+|aaaa | 4|
 
-          aaaaaa  5
+|   aaaaa|  2|
 
-      aaaaaaaaaa  2
+|  aaaaaa | 5|
 
-     aaaaaaaaaaa  1
+|  aaaaaaaaaa|  2|
 
-    aaaaaaaaaaaaaaahhhhh  2
+| aaaaaaaaaaa | 1|
+
+|aaaaaaaaaaaaaaahhhhh | 2|
 
 
 
@@ -245,7 +285,7 @@ The queries done while the application was running were used to make sure the ap
 !python analysis/finalresults.py the
 ```
 
-    Number of occurences of 'the':  4585 	@ Thu Dec  3 03:37:58 2015
+Number of occurences of 'the':  4585 	@ Thu Dec  3 03:37:58 2015
 
 
 
@@ -254,7 +294,7 @@ The queries done while the application was running were used to make sure the ap
 !python analysis/finalresults.py the
 ```
 
-    Number of occurences of 'the':  60769 	@ Thu Dec  3 05:16:51 2015
+Number of occurences of 'the':  60769 	@ Thu Dec  3 05:16:51 2015
 
 
 
@@ -263,7 +303,7 @@ The queries done while the application was running were used to make sure the ap
 !python analysis/finalresults.py the
 ```
 
-    Number of occurences of 'the':  150201 	@ Fri Dec  4 03:06:11 2015
+Number of occurences of 'the':  150201 	@ Fri Dec  4 03:06:11 2015
 
 
 
@@ -273,7 +313,7 @@ The queries done while the application was running were used to make sure the ap
 !python analysis/finalresults.py the
 ```
 
-    Number of occurences of 'the':  150201 	@ Fri Dec  4 03:06:32 2015
+Number of occurences of 'the':  150201 	@ Fri Dec 11 19:46:25 2015
 
 
 
@@ -298,21 +338,22 @@ By default, only the first 25 words are printed to the console. The number of wo
 !python analysis/histogram.py 1000 1100
 ```
 
-    Reporting 5 words (out of 5 words):
+Reporting 5 words (out of 5 words):
 
-    
 
-            Word  Count
 
-             our  1040
+|Word|  Count|
+|:--|:--:|
 
-             her  1047
+| our | 1040|
 
-          weeknd  1070
+| her | 1047|
 
-           would  1072
+|  weeknd|  1070|
 
-            back  1087
+|   would|  1072|
+
+|back | 1087|
 
 
 
@@ -322,61 +363,62 @@ By default, only the first 25 words are printed to the console. The number of wo
 !python analysis/histogram.py 1000 1100
 ```
 
-    Reporting 25 words (out of 32 words):
+Reporting 25 words (out of 32 words):
 
-    
 
-            Word  Count
 
-    relationship  1002
+|Word|  Count|
+|:--|:--:|
 
-          chance  1005
+|relationship |1002
 
-           smile  1007
+|  chance| 1005|
 
-            fans  1008
+|   smile | 1007|
 
-              yo  1009
+|fans | 1008|
 
-            asks  1010
+|  yo | 1009|
 
-             far  1020
+|asks | 1010|
 
-         answers  1020
+| far | 1020|
 
-           media  1026
+| answers|  1020|
 
-            full  1026
+|   media|  1026|
 
-            gone  1031
+|full | 1026|
 
-            mama  1031
+|gone | 1031|
 
-            must  1034
+|mama | 1031|
 
-         prayers  1035
+|must | 1034|
 
-            past  1042
+| prayers | 1035|
 
-            turn  1042
+|past | 1042|
 
-             wow  1044
+|turn | 1042|
 
-           hours  1045
+| wow | 1044|
 
-        probably  1046
+|   hours | 1045|
 
-           story  1048
+|probably | 1046|
 
-            fall  1049
+|   story | 1048|
 
-          havent  1051
+|fall | 1049|
 
-           least  1064
+|  havent | 1051|
 
-               s  1069
+|   least | 1064|
 
-        violence  1082
+|   s | 1069|
+
+|violence | 1082|
 
 
 
@@ -386,71 +428,72 @@ By default, only the first 25 words are printed to the console. The number of wo
 !python analysis/histogram.py 1000 1100 30
 ```
 
-    Reporting 30 words (out of 32 words):
+Reporting 30 words (out of 32 words):
 
-    
 
-            Word  Count
 
-    relationship  1002
+|Word|  Count|
+|:--|:--:|
 
-          chance  1005
+|relationship  |1002|
 
-           smile  1007
+|  chance | 1005|
 
-            fans  1008
+|   smile | 1007|
 
-              yo  1009
+|fans | 1008|
 
-            asks  1010
+|  yo | 1009|
 
-             far  1020
+|asks | 1010|
 
-         answers  1020
+| far | 1020|
 
-           media  1026
+| answers|  1020|
 
-            full  1026
+|   media|  1026|
 
-            gone  1031
+|full | 1026|
 
-            mama  1031
+|gone | 1031|
 
-            must  1034
+|mama | 1031|
 
-         prayers  1035
+|must | 1034|
 
-            past  1042
+|prayers | 1035|
 
-            turn  1042
+|past | 1042|
 
-             wow  1044
+|turn | 1042|
 
-           hours  1045
+| wow | 1044|
 
-        probably  1046
+|   hours | 1045|
 
-           story  1048
+|probably | 1046|
 
-            fall  1049
+|   story | 1048|
 
-          havent  1051
+|fall | 1049|
 
-           least  1064
+|  havent | 1051|
 
-               s  1069
+|   least | 1064|
 
-        violence  1082
+|   s | 1069|
 
-             top  1082
+|violence | 1082|
 
-            goes  1083
+| top | 1082|
 
-              vs  1086
+|goes | 1083|
 
-            rest  1087
+|  vs | 1086|
 
-            true  1092
+|rest | 1087|
+
+|true | 1092|
 
 
 
@@ -476,52 +519,50 @@ To get the top-20 words by count:
 !mv plot.png analysis/
 ```
 
-    Top-20
+Top-20
 
-    ID     Word  Count
+|Rank|Word|Count|
+|:--:|:--|:--|
 
-     1       the  150201
+|1| the|  150201|
 
-     2         i  122672
+|2| i | 122672|
 
-     3       you  99256
+|3| you | 99256|
 
-     4         a  97611
+|4| a | 97611|
 
-     5        to  88872
+|5| to | 88872|
 
-     6       and  51924
+|6|   and | 51924|
 
-     7        in  48953
+|7|in| 48953|
 
-     8        of  47513
+|8|of  47513|
 
-     9        is  44492
+|9|is|  44492|
 
-    10       for  42390
+|10 |  for|  42390|
 
-    11        my  34410
+|11|my|  34410|
 
-    12      this  30196
+|12|  this|  30196|
 
-    13        on  29920
+|13|on | 29920|
 
-    14        me  29550
+|14|me | 29550|
 
-    15        it  28681
+|15it | 28681|
 
-    16        im  27679
+|16|im|  27679|
 
-    17      that  27270
+|17|  that | 27270|
 
-    18        be  24402
+|18|be | 24402|
 
-    19      when  23132
+|19 | when | 23132|
 
-    20        so  22948
-
-
-
+|20|so | 22948|
 
 
 
